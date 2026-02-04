@@ -1,30 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="utf-8">
-<title>ewol</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EWOL LIST</title>
 
 <style>
+/* 기본 스타일 */
 body {
   font-family: sans-serif;
   margin: 20px;
+  line-height: 1.5;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 #search {
-  width: 95%;
+  display: block;
+  margin: 0 auto 20px auto;
+  width: 90%;
+  max-width: 500px;
   padding: 10px;
-  margin: 10px 0;
   font-size: 16px;
+  box-sizing: border-box;
 }
 
 ul {
   list-style: none;
   padding: 0;
+  margin: 0;
+  max-width: 700px;
 }
 
 li {
-  padding: 6px;
+  padding: 8px;
   border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  body {
+    margin: 10px;
+  }
+  #search {
+    width: 95%;
+  }
+  ul {
+    max-width: 100%;
+  }
 }
 </style>
 
@@ -284,7 +311,7 @@ li {
 <li>1122 중복확인</li>
 <li>1125 Daffyduck</li>
 <li>1158 오베R</li>
-<li>1167 욜로르</li>
+<li>1167 올로르</li>
 <li>1172 다트리버</li>
 <li>1141 최코님</li>
 <li>1204 러빙웨이</li>
@@ -412,21 +439,42 @@ li {
 
 </ul>
 
-<script>
 document.getElementById("search").addEventListener("keyup", function() {
-
   let v = this.value.toLowerCase();
   let items = document.querySelectorAll("#list li");
 
   items.forEach(li => {
-    if (li.innerText.toLowerCase().includes(v)) {
-      li.style.display = "";
-    } else {
-      li.style.display = "none";
-    }
+    li.style.display = li.innerText.toLowerCase().includes(v) ? "" : "none";
   });
-
 });
+
+const items = document.querySelectorAll("#list li");
+
+items.forEach(li => {
+  li.addEventListener("click", () => {
+    const url = li.getAttribute("data-video");
+    if (url) window.open(url, "_blank"); // 새 탭에서 열기
+  });
+});
+<script>
+// 검색 기능
+document.getElementById("search").addEventListener("keyup", function() {
+  const v = this.value.toLowerCase();
+  const items = document.querySelectorAll("#list li");
+
+  items.forEach(li => {
+    li.style.display = li.innerText.toLowerCase().includes(v) ? "" : "none";
+  });
+});
+
+// 영상 재생 기능 (data-video 속성 사용)
+document.querySelectorAll("#list li").forEach(li => {
+  li.addEventListener("click", () => {
+    const url = li.getAttribute("data-video");
+    if (url) window.open(url, "_blank"); // 새 탭에서 영상 열기
+  });
+});
+
 </script>
 
 </body>
