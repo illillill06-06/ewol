@@ -19,10 +19,11 @@ header {
 }
 
 #search {
-  width: 300px;
-  max-width: 90%;
+  width: 100%;
+  max-width: 600px; /* 최대 크기 제한 */
   padding: 10px;
   font-size: 16px;
+  box-sizing: border-box;
 }
 
 /* 목록 전체 가운데 정렬, 글씨는 왼쪽 */
@@ -30,8 +31,9 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0 auto;
-  max-width: 600px;
-  width: 95%;
+  width: 100%;
+  max-width: 600px; /* 최대 크기 제한 */
+  box-sizing: border-box;
 }
 
 li {
@@ -44,17 +46,16 @@ li {
 
 /* 반응형: 모바일/태블릿 대응 */
 @media screen and (max-width: 768px) {
-  #search {
-    width: 95%;
+  body {
+    padding: 0; /* 양쪽 여백 제거 */
   }
-  ul {
-    width: 95%;
+  #search, ul {
+    max-width: 100%;
+    width: 100%;
   }
 }
 </style>
-
 </head>
-
 <body>
 
 <header>
