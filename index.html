@@ -1,80 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-<meta charset="utf-8">
-<title>ewol</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EWOL LIST</title>
 <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: sans-serif;
-}
-
-body {
-  padding: 0;
-}
-
-/* 제목과 검색창 가운데 */
-header {
-  text-align: center;
-  padding: 10px 0;
-}
-
-/* 검색창 */
-#search {
-  width: 95%;
-  max-width: 600px;
-  padding: 10px;
-  font-size: 16px;
-  box-sizing: border-box;
-}
-
-/* 목록 틀 가운데, 글씨 왼쪽 */
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 auto;
-  width: 95%;
-  max-width: 600px;
-}
-
-li {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
-  cursor: pointer;
-  word-break: break-word;
-}
-
-/* 반응형: 기기 폭에 맞게 자동 조정 */
-@media screen and (max-width: 1024px) {
-  #search, ul {
-    width: 98%;
-    max-width: none;
+  /* 전체 기본 스타일 */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
+
+  body {
+    font-family: sans-serif;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 15px;
+    word-break: break-word;
+  }
+
   #search {
-    font-size: 15px;
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    display: block;
+    text-align: center;
   }
-}
 
-@media screen and (max-width: 767px) {
-  #search {
-    font-size: 14px;
+  /* 목록 틀 */
+  #list {
+    list-style: none;
+    width: 100%;
+    max-width: 600px;
   }
-  li {
-    padding: 8px;
+
+  #list li {
+    padding: 8px 12px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    text-align: left; /* 글씨는 왼쪽 정렬 */
+    word-break: break-word;
   }
-}
+
+  #list li:hover {
+    background-color: #f0f0f0;
+  }
+
+  /* 반응형 */
+  @media (max-width: 768px) {
+    body {
+      padding: 10px;
+    }
+
+    #search {
+      max-width: 100%;
+    }
+
+    #list {
+      max-width: 100%;
+    }
+  }
 </style>
 </head>
 <body>
 
-<header>
-  <h1>EWOL LIST</h1>
-  <input id="search" placeholder="검색어 입력">
-</header>
-
+<h1>EWOL LIST</h1>
+<input id="search" placeholder="검색어 입력">
 
 <ul id="list">
 
@@ -452,24 +452,25 @@ li {
 
 </ul>
 
-<script>
-// 검색 기능
-document.getElementById("search").addEventListener("keyup", function() {
-  let v = this.value.toLowerCase();
-  let items = document.querySelectorAll("#list li");
-  items.forEach(li => {
-    li.style.display = li.innerText.toLowerCase().includes(v) ? "" : "none";
-  });
-});
 
-// 영상 재생 기능
-const items = document.querySelectorAll("#list li");
-items.forEach(li => {
-  li.addEventListener("click", () => {
-    const url = li.getAttribute("data-video");
-    if (url) window.open(url, "_blank");
+<script>
+  // 검색 기능
+  document.getElementById("search").addEventListener("keyup", function() {
+    let v = this.value.toLowerCase();
+    let items = document.querySelectorAll("#list li");
+    items.forEach(li => {
+      li.style.display = li.innerText.toLowerCase().includes(v) ? "" : "none";
+    });
   });
-});
+
+  // 영상 재생 기능 (li 클릭 시)
+  const items = document.querySelectorAll("#list li");
+  items.forEach(li => {
+    li.addEventListener("click", () => {
+      const url = li.getAttribute("data-video");
+      if (url) window.open(url, "_blank"); // 새 탭에서 영상 재생
+    });
+  });
 </script>
 
 </body>
