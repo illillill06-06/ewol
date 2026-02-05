@@ -13,6 +13,12 @@
   }
 </style>
 
+<style>
+  .hot {
+    color: #c92a2a !important;
+    font-weight: bold;
+  }
+</style>
 
 <style>
   body {
@@ -399,7 +405,7 @@
 <li>1696 골타69</li>
 <li>1697 피카츄69</li>
 <li>1777 다니기긔</li>
-<li>1825 S. 김인호</li>
+<li>1825 S. 김인호, S. K.I.H</li>
 <li>1878 라이즈</li>
 <li>1892 짜이</li>
 <li>2000 VVIP</li>
@@ -428,9 +434,9 @@
 <li>2111 S. 박아랏</li>
 <li>2112 S. 야부리맨</li>
 <li>2125 S. V12멜로디</li>
+<li>2172 S. 도브네</li>
 <li>2222 2월2일2시2분</li>
 <li>2242 S. 다니율응</li>
-<li>2172 S. 도브네</li>
 <li>2272 S. 까스댄스댄스</li>
 <li>2333 S. 주댕이이이</li>
 <li>2345 S. 맛집</li>
@@ -442,6 +448,7 @@
 <li>2696 S. 골타69</li>
 <li>2697 S. 피카츄69</li>
 <li>2777 S. 티미</li>
+<li>2825 이뻐이월</li>
 <li>2948 S. V12멜로디</li>
 <li>2951 S. Ready501</li>
 <li>2998 S. 최윤입니다</li>
@@ -476,6 +483,22 @@
       }
     });
   });
+</script>
+
+<script>
+const hotNumbers = [
+992,1007,1017,1021,1022,1028,1034,1037,1045,1051,
+1052,1053,1056,1072,1075,1077,1078,1082,1086,1099,
+1221,1333,1425,2045,2052,2222,2172,2333,2411,2825,
+622
+];
+
+document.querySelectorAll("li").forEach(li => {
+  const num = parseInt(li.innerText);
+  if (hotNumbers.includes(num)) {
+    li.classList.add("hot");
+  }
+});
 </script>
 
 </body>
