@@ -1,56 +1,42 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EWOL LIST</title>
-
+<title>ewol</title>
 <style>
-/* 기본 스타일 */
 body {
   font-family: sans-serif;
   margin: 20px;
-  line-height: 1.5;
 }
 
-h1 {
+/* 제목과 검색창 가운데 정렬 */
+h1, #search {
   text-align: center;
-  margin-bottom: 10px;
 }
 
-#search {
-  display: block;
-  margin: 0 auto 20px auto;
-  width: 90%;
-  max-width: 500px;
-  padding: 10px;
-  font-size: 16px;
-  box-sizing: border-box;
-}
-
+/* 목록 전체 가운데 정렬 */
 ul {
   list-style: none;
   padding: 0;
-  margin: 0;
-  max-width: 700px;
+  margin: 0 auto;      /* ul 자체를 가운데로 */
+  max-width: 600px;    /* 너비 제한 */
 }
 
+/* 목록 아이템 글씨 왼쪽 정렬 */
 li {
-  padding: 8px;
+  padding: 6px;
   border-bottom: 1px solid #ddd;
-  cursor: pointer;
+  text-align: left;
+  cursor: pointer; /* 클릭 가능 표시 */
 }
 
 /* 반응형 */
-@media (max-width: 768px) {
-  body {
-    margin: 10px;
+@media screen and (max-width: 768px) {
+  ul {
+    max-width: 95%;
   }
   #search {
     width: 95%;
-  }
-  ul {
-    max-width: 100%;
   }
 }
 </style>
@@ -459,21 +445,24 @@ items.forEach(li => {
 <script>
 // 검색 기능
 document.getElementById("search").addEventListener("keyup", function() {
-  const v = this.value.toLowerCase();
-  const items = document.querySelectorAll("#list li");
-
+  let v = this.value.toLowerCase();
+  let items = document.querySelectorAll("#list li");
   items.forEach(li => {
     li.style.display = li.innerText.toLowerCase().includes(v) ? "" : "none";
   });
 });
 
-// 영상 재생 기능 (data-video 속성 사용)
-document.querySelectorAll("#list li").forEach(li => {
+// 영상 재생 기능
+const items = document.querySelectorAll("#list li");
+items.forEach(li => {
   li.addEventListener("click", () => {
     const url = li.getAttribute("data-video");
-    if (url) window.open(url, "_blank"); // 새 탭에서 영상 열기
+    if (url) {
+      window.open(url, "_blank"); // 새 탭에서 재생
+    }
   });
 });
+
 
 </script>
 
