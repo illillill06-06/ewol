@@ -4,54 +4,66 @@
 <meta charset="utf-8">
 <title>ewol</title>
 <style>
-/* 전체 반응형 기본 설정 */
-body {
-  font-family: sans-serif;
+html, body {
   margin: 0;
-  padding: 20px;
+  padding: 0;
   box-sizing: border-box;
+  font-family: sans-serif;
 }
 
-/* 제목과 검색창 가운데 정렬 */
+body {
+  padding: 0;
+}
+
+/* 제목과 검색창 가운데 */
 header {
   text-align: center;
-  margin-bottom: 20px;
+  padding: 10px 0;
 }
 
+/* 검색창 */
 #search {
-  width: 100%;
-  max-width: 600px; /* 최대 크기 제한 */
+  width: 95%;
+  max-width: 600px;
   padding: 10px;
   font-size: 16px;
   box-sizing: border-box;
 }
 
-/* 목록 전체 가운데 정렬, 글씨는 왼쪽 */
+/* 목록 틀 가운데, 글씨 왼쪽 */
 ul {
   list-style: none;
   padding: 0;
   margin: 0 auto;
-  width: 100%;
-  max-width: 600px; /* 최대 크기 제한 */
-  box-sizing: border-box;
+  width: 95%;
+  max-width: 600px;
 }
 
 li {
   padding: 10px;
   border-bottom: 1px solid #ddd;
-  text-align: left;   /* 글씨 왼쪽 */
-  cursor: pointer;    /* 클릭 가능 표시 */
-  word-break: break-word; /* 긴 글도 줄바꿈 */
+  text-align: left;
+  cursor: pointer;
+  word-break: break-word;
 }
 
-/* 반응형: 모바일/태블릿 대응 */
-@media screen and (max-width: 768px) {
-  body {
-    padding: 0; /* 양쪽 여백 제거 */
-  }
+/* 반응형: 기기 폭에 맞게 자동 조정 */
+@media screen and (max-width: 1024px) {
   #search, ul {
-    max-width: 100%;
-    width: 100%;
+    width: 98%;
+    max-width: none;
+  }
+  #search {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  #search {
+    font-size: 14px;
+  }
+  li {
+    padding: 8px;
   }
 }
 </style>
@@ -62,6 +74,7 @@ li {
   <h1>EWOL LIST</h1>
   <input id="search" placeholder="검색어 입력">
 </header>
+
 
 <ul id="list">
 
@@ -410,7 +423,7 @@ li {
 <li>3112 S. 야부리맨</li>
 <li>1007 꽃욜로ゑ</li>
 <li>1017 도브네</li>
-<li>1021 디엘</li>
+<li>1021 [디엘]</li>
 <li>1022 용이</li>
 <li>1028 날위한이별</li>
 <li>1034 월둘셋야</li>
@@ -454,9 +467,7 @@ const items = document.querySelectorAll("#list li");
 items.forEach(li => {
   li.addEventListener("click", () => {
     const url = li.getAttribute("data-video");
-    if (url) {
-      window.open(url, "_blank"); // 새 탭에서 재생
-    }
+    if (url) window.open(url, "_blank");
   });
 });
 </script>
