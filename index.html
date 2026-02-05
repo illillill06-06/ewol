@@ -4,38 +4,50 @@
 <meta charset="utf-8">
 <title>ewol</title>
 <style>
+/* 전체 반응형 기본 설정 */
 body {
   font-family: sans-serif;
-  margin: 20px;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 /* 제목과 검색창 가운데 정렬 */
-h1, #search {
+header {
   text-align: center;
+  margin-bottom: 20px;
 }
 
-/* 목록 전체 가운데 정렬 */
+#search {
+  width: 300px;
+  max-width: 90%;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* 목록 전체 가운데 정렬, 글씨는 왼쪽 */
 ul {
   list-style: none;
   padding: 0;
-  margin: 0 auto;      /* ul 자체를 가운데로 */
-  max-width: 600px;    /* 너비 제한 */
+  margin: 0 auto;
+  max-width: 600px;
+  width: 95%;
 }
 
-/* 목록 아이템 글씨 왼쪽 정렬 */
 li {
-  padding: 6px;
+  padding: 10px;
   border-bottom: 1px solid #ddd;
-  text-align: left;
-  cursor: pointer; /* 클릭 가능 표시 */
+  text-align: left;   /* 글씨 왼쪽 */
+  cursor: pointer;    /* 클릭 가능 표시 */
+  word-break: break-word; /* 긴 글도 줄바꿈 */
 }
 
-/* 반응형 */
+/* 반응형: 모바일/태블릿 대응 */
 @media screen and (max-width: 768px) {
-  ul {
-    max-width: 95%;
-  }
   #search {
+    width: 95%;
+  }
+  ul {
     width: 95%;
   }
 }
@@ -45,9 +57,10 @@ li {
 
 <body>
 
-<h1>EWOL LIST</h1>
-
-<input id="search" placeholder="검색어 입력">
+<header>
+  <h1>EWOL LIST</h1>
+  <input id="search" placeholder="검색어 입력">
+</header>
 
 <ul id="list">
 
@@ -425,23 +438,6 @@ li {
 
 </ul>
 
-document.getElementById("search").addEventListener("keyup", function() {
-  let v = this.value.toLowerCase();
-  let items = document.querySelectorAll("#list li");
-
-  items.forEach(li => {
-    li.style.display = li.innerText.toLowerCase().includes(v) ? "" : "none";
-  });
-});
-
-const items = document.querySelectorAll("#list li");
-
-items.forEach(li => {
-  li.addEventListener("click", () => {
-    const url = li.getAttribute("data-video");
-    if (url) window.open(url, "_blank"); // 새 탭에서 열기
-  });
-});
 <script>
 // 검색 기능
 document.getElementById("search").addEventListener("keyup", function() {
@@ -462,8 +458,6 @@ items.forEach(li => {
     }
   });
 });
-
-
 </script>
 
 </body>
