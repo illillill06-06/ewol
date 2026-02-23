@@ -384,10 +384,8 @@ max-width: 90%;
     width: min(92vw, 1200px);
     aspect-ratio: 16 / 9;
   }
-}
 
 </style>
-
 
 </head>
 <body>
@@ -413,6 +411,7 @@ max-width: 90%;
 <ul id="list">
   <li data-number="99">
   <img src="99.png" alt="99 3자리 랜덤시그" style="width:100%; border-radius:8px;"> 99 3자리 랜덤시그
+</li>
   <li data-number="100">
   <img src="100.png" alt="100 프리댄스" style="width:100%; border-radius:8px;"> 100 프리댄스
 </li>
@@ -1553,6 +1552,7 @@ max-width: 90%;
 </li>
 <li data-number="11112">
   <img src="11112.gif" alt="11112 킹부리맨" style="width:100%; border-radius:8px;"> 11112 킹부리맨
+</li>
 <li data-number="12425">
   <img src="12425.gif" alt="12425 많이 사랑해 이월" style="width:100%; border-radius:8px;"> 12425 많이 사랑해 이월
 </li>
@@ -1561,6 +1561,9 @@ max-width: 90%;
 </li>
 <li data-number="20000">
   <img src="20000.gif" alt="20000 200K" style="width:100%; border-radius:8px;"> 20000 200K
+</li>
+<li data-number="21900">
+  <img src="21900.png" alt="21900 HBD February" style="width:100%; border-radius:8px;"> 21900 HBD February
 </li>
 <li data-number="30000">
   <img src="30000.gif" alt="30000 300K" style="width:100%; border-radius:8px;"> 30000 300K
@@ -1598,7 +1601,7 @@ function filterRange(min, max) {
   });
 }
 
-  const hotList = [125, 622, 992, 1007, 1017, 1021, 1022, 1028, 1034, 1037, 1045, 1051, 1052, 1053, 1056, 1072, 1075, 1077, 1078, 1082, 1086, 1099, 1221, 1333, 1425, 2045, 2052, 2172, 2222, 2333, 2411, 2825, 3325, 5725, 12425];
+  const hotList = [125, 622, 992, 1007, 1017, 1021, 1022, 1028, 1034, 1037, 1045, 1051, 1052, 1053, 1056, 1072, 1075, 1077, 1078, 1082, 1086, 1099, 1221, 1333, 1425, 2045, 2052, 2172, 2222, 2333, 2411, 2825, 3325, 5725, 12425, 21900];
 
 const multiVideo = {
 
@@ -2500,9 +2503,9 @@ modal.addEventListener("click", (e) => {
   });
 
 // 버튼 기능 추가
-const 추천List = [104, 106, 125, 127, 129, 143, 146, 149, 151, 161, 198, 204, 207, 242, 244, 245, 305, 332, 404, 408, 992, 1007, 1012, 1017, 1021, 1022, 1028, 1034, 1037, 1042, 1045, 1051, 1052, 1053, 1056, 1072, 1075, 1077, 1078, 1082, 1086, 1099, 1221, 1333, 1425, 2045, 2052, 2172, 2222, 2333, 2411, 2825, 3000, 3325, 5725, 12425];
+const 추천List = [104, 106, 125, 127, 129, 143, 146, 149, 151, 161, 198, 204, 207, 242, 244, 245, 305, 332, 404, 408, 992, 1007, 1012, 1017, 1021, 1022, 1028, 1034, 1037, 1042, 1045, 1051, 1052, 1053, 1056, 1072, 1075, 1077, 1078, 1082, 1086, 1099, 1221, 1333, 1425, 2045, 2052, 2172, 2222, 2333, 2411, 2825, 3000, 3325, 5725, 12425, 21900];
 
-const 월플단List = [125, 622, 992, 1007, 1017, 1021, 1022, 1028, 1034, 1037, 1045, 1051, 1052, 1053, 1056, 1072, 1075, 1077, 1078, 1082, 1086, 1099, 1221, 1333, 1425, 2045, 2052, 2172, 2222, 2333, 2411, 2825, 3325, 5725, 12425];
+const 월플단List = [125, 622, 992, 1007, 1017, 1021, 1022, 1028, 1034, 1037, 1045, 1051, 1052, 1053, 1056, 1072, 1075, 1077, 1078, 1082, 1086, 1099, 1221, 1333, 1425, 2045, 2052, 2172, 2222, 2333, 2411, 2825, 3325, 5725, 12425, 21900];
 
 document.getElementById("추천").addEventListener("click", () => {
   items.forEach(li => {
@@ -2601,6 +2604,38 @@ document.addEventListener("DOMContentLoaded", () => {
     io.observe(img);
   });
 });
+<script>
+(() => {
+  const list = document.getElementById("list");
+  if (!list) return;
+
+  list.querySelectorAll("img").forEach(img => {
+    if (img.dataset.src) return;
+
+    const src = img.getAttribute("src");
+    if (!src) return;
+
+    img.dataset.src = src;
+    img.removeAttribute("src");
+    img.loading = "lazy";
+    img.decoding = "async";
+  });
+
+  const io = new IntersectionObserver((entries, obs) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      const img = e.target;
+      const src = img.dataset.src;
+      if (src) {
+        img.src = src;
+        delete img.dataset.src;
+      }
+      obs.unobserve(img);
+    }
+  }, { rootMargin: "600px 0px", threshold: 0.01 });
+
+  list.querySelectorAll("img[data-src]").forEach(img => io.observe(img));
+})();
 </script>
 
 </body>
