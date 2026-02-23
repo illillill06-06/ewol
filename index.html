@@ -2591,12 +2591,6 @@ window.addEventListener("load", () => {
 
 <button id="topBtn">↑</button>
 
-
-<script>
-(() => {
-  const list = document.getElementById("list");
-  if (!list) return;
-
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const list = document.getElementById("list");
@@ -2606,16 +2600,16 @@ document.addEventListener("DOMContentLoaded", () => {
     for (const e of entries) {
       if (!e.isIntersecting) continue;
       const img = e.target;
-      const src = img.dataset.src;
+      const src = img.getAttribute("data-src");
       if (src) {
-        img.src = "./" + src;
+        img.src = src;
         img.removeAttribute("data-src");
       }
       obs.unobserve(img);
     }
-  }, { rootMargin: "800px 0px", threshold: 0.01 });
+  }, { rootMargin: "800px 0px" });
 
-  list.querySelectorAll("img[data-src]").forEach(img => {
+  document.querySelectorAll("#list img[data-src]").forEach(img => {
     img.loading = "lazy";
     img.decoding = "async";
     io.observe(img);
