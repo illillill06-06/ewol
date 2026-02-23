@@ -2608,7 +2608,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const img = e.target;
       const src = img.dataset.src;
       if (src) {
-        img.src = src;
+        img.src = "./" + src;
         img.removeAttribute("data-src");
       }
       obs.unobserve(img);
